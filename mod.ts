@@ -235,6 +235,4 @@ export class Scriptable {
       }
     }
   }
-
-  static fragment() {}
 }

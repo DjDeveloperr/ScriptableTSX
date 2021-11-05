@@ -120,6 +120,77 @@ function processImageProps(image: WidgetImage, props: JSX.ImageProps) {
       image.centerAlignImage();
       break;
   }
+
+  if (props.size) {
+    image.imageSize = props.size;
+  }
+
+  if (props.borderColor) {
+    image.borderColor = processJSXColor(props.borderColor);
+  }
+
+  if (props.borderWidth) {
+    image.borderWidth = props.borderWidth;
+  }
+
+  if (props.containerRelativeShape) {
+    image.containerRelativeShape = props.containerRelativeShape;
+  }
+
+  switch (props.contentMode) {
+    case "filling":
+      image.applyFillingContentMode();
+      break;
+    case "fitting":
+      image.applyFittingContentMode();
+      break;
+  }
+
+  if (props.cornerRadius) {
+    image.cornerRadius = props.cornerRadius;
+  }
+
+  if (props.opacity) {
+    image.imageOpacity = props.opacity;
+  }
+
+  if (props.resizable) {
+    image.resizable = props.resizable;
+  }
+
+  if (props.tintColor) {
+    image.tintColor = processJSXColor(props.tintColor);
+  }
+
+  if (props.url) {
+    image.url = props.url;
+  }
+}
+
+function processWidgetProps(widget: ListWidget, props: JSX.WidgetProps) {
+  if (props.backgroundColor) {
+    widget.backgroundColor = processJSXColor(props.backgroundColor);
+  }
+
+  if (props.backgroundGradient) {
+    widget.backgroundGradient = props.backgroundGradient;
+  }
+
+  if (props.backgroundImage) {
+    widget.backgroundImage = props.backgroundImage;
+  }
+
+  if (props.refreshAfterDate) {
+    widget.refreshAfterDate = props.refreshAfterDate;
+  }
+
+  if (props.spacing !== undefined) {
+    widget.spacing = props.spacing;
+  }
+
+  if (props.url) {
+    widget.url = props.url;
+  }
 }
 
 function processContainerChildren(widget: IContainer, children: any[]) {
@@ -145,7 +216,7 @@ function processContainerChildren(widget: IContainer, children: any[]) {
         switch (child.type) {
           case "text": {
             const text = widget.addText(child.text);
-            processTextProps(text, child.props);
+            processTextProps(text, child.props || {});
             break;
           }
 
@@ -154,7 +225,7 @@ function processContainerChildren(widget: IContainer, children: any[]) {
             const date = widget.addDate(
               init instanceof Date ? init : new Date(init),
             );
-            processTextProps(date, child.props);
+            processTextProps(date, child.props || {});
             break;
           }
 
@@ -164,7 +235,7 @@ function processContainerChildren(widget: IContainer, children: any[]) {
             if (child.type === "vstack") {
               stack.layoutVertically();
             }
-            processStackProps(stack, child.props);
+            processStackProps(stack, child.props || {});
             processContainerChildren(stack, child.children);
             break;
           }
@@ -188,7 +259,7 @@ function processContainerChildren(widget: IContainer, children: any[]) {
             }
 
             const image = widget.addImage(init);
-            processImageProps(image, child.props);
+            processImageProps(image, child.props || {});
             break;
           }
         }
@@ -209,6 +280,7 @@ export class Scriptable {
         case "widget":
           const widget = new ListWidget();
           processContainerChildren(widget, children);
+          processWidgetProps(widget, props || {});
           return widget;
         case "text":
           let text = "";
@@ -218,14 +290,13 @@ export class Scriptable {
               typeof child === "number" ||
               typeof child === "bigint"
             ) {
-              text += (text === "" ? "" : "\n") + child;
+              text += child;
             }
           }
           return { type: element, props, text };
         case "hstack":
-          return { type: element, props };
         case "vstack":
-          return { type: element, props };
+          return { type: element, props, children };
         case "spacer":
           return { type: element, props };
         case "image":

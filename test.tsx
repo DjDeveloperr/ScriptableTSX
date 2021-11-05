@@ -9,7 +9,7 @@ function MyWidget({ author, avatar, content, channel, messageID, channelID, guil
   channelID: string;
   guildID: string;
   timestamp: string;
-}) {
+}): ListWidget {
   return (
     <widget
       backgroundColor="#36393F"
@@ -22,10 +22,10 @@ function MyWidget({ author, avatar, content, channel, messageID, channelID, guil
         {avatar && <image
           image={avatar}
           size={new Size(38, 38)}
-          cornerRadius={16}
+          cornerRadius={18}
         />}
-        <vstack spacing={8}>
-          <hstack>
+        <vstack>
+          <hstack spacing={8}>
             <text color="#FFFFFF" font={Font.systemFont(18)}>{author}</text>
             <text color="#70747B" font={Font.systemFont(15)}>{timestamp}</text>
           </hstack>
@@ -36,7 +36,13 @@ function MyWidget({ author, avatar, content, channel, messageID, channelID, guil
   )
 }
 
-Script.setWidget(MyWidget({
+let avatar;
+{
+  const req = new Request("https://cdn.discordapp.com/attachments/783321611343757313/906167826782486588/nevergonnagiveyouup.png");
+  avatar = await req.loadImage();
+}
+
+const widget = MyWidget({
   author: "DjDeveloper",
   channel: "general",
   content: "test",
@@ -44,4 +50,11 @@ Script.setWidget(MyWidget({
   channelID: "2",
   guildID: "3",
   timestamp: "Today at 00:00",
-}));
+  avatar,
+});
+
+if (config.runsInApp) {
+  widget.presentMedium();
+} else {
+  Script.setWidget(widget);
+}

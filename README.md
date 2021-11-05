@@ -35,6 +35,11 @@ function MyWidget() {
 }
 ```
 
+## TODO
+
+- Complete the `env.d.ts` types.
+- Maybe a small HTML renderer for Widgets to make development easier?
+
 ## Credits
 
 `env.d.ts` is entirely based on https://docs.scriptable.app. Even the JS Doc comments.

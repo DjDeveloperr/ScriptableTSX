@@ -1,5 +1,3 @@
-/// <reference path="./env.d.ts" />
-
 import { Scriptable } from "./mod.ts";
 
 function MyWidget({ author, avatar, content, channel, messageID, channelID, guildID, timestamp }: {

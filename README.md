@@ -4,11 +4,7 @@ A framework for [Scriptable](https://scriptable.app) to make creating iOS widget
 
 ## Usage
 
-Just import `Scriptable` from `mod.ts` and add reference to `env.d.ts`, such as
-
-```ts
-/// <reference path="./env.d.ts" />
-```
+Just import `Scriptable` from `mod.ts`.
 
 Then you can use `deno bundle -c tsconfig.json filename.tsx outfile.js` to compile it.
 

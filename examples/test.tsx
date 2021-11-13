@@ -1,4 +1,4 @@
-import { Scriptable } from "./mod.ts";
+import { Scriptable } from "../mod.ts";
 
 function MyWidget({ author, avatar, content, channel, messageID, channelID, guildID, timestamp }: {
   author: string;
@@ -15,7 +15,6 @@ function MyWidget({ author, avatar, content, channel, messageID, channelID, guil
       backgroundColor="#36393F"
       url={`https://discord.com/channels/${guildID}/${channelID}/${messageID}`}
       spacing={8}
-      refreshAfterDate={new Date()}
     >
       <text color="#FAFAFA" font={Font.systemFont(15)}>In #{channel}</text>
       <hstack spacing={8}>

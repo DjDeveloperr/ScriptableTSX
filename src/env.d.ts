@@ -2081,6 +2081,7 @@ declare namespace JSX {
   type JSXColor = Color | string | number;
   type Align = "left" | "right" | "center";
   type ContentAlign = "top" | "bottom" | "center";
+  type DateStyle = "time" | "date" | "relative" | "offset" | "timer";
 
   interface Alignable {
     align?: Align;
@@ -2146,6 +2147,7 @@ declare namespace JSX {
 
   interface DateProps extends TextProps {
     date: Date | string | number;
+    style?: DateStyle;
   }
 
   interface IntrinsicElements {

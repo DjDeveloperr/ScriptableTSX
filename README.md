@@ -4,19 +4,17 @@ A framework for [Scriptable](https://scriptable.app) to make creating iOS widget
 
 ## Usage
 
-Just import `Scriptable` from `mod.ts`.
+Install the CLI using [Deno](https://deno.land/):
 
-Then you can use `deno bundle -c tsconfig.json filename.tsx outfile.js` to compile it.
-
-`tsconfig.json`
-```json
-{
-  "compilerOptions": {
-    "lib": ["ES2021"],
-    "jsxFactory": "Scriptable.createElement"
-  }
-}
 ```
+deno install -Arf -n scriptable https://raw.githubusercontent.com/DjDeveloperr/ScriptableTSX/main/cli.ts
+```
+
+And do `scriptable init <name>`. After this you can go in the project directory
+and do `scriptable bundle`, which will output a `bundle.js` file that you can use
+on Scriptable.
+
+Note: add `--vscode` (or `-v`) flag to `scriptable init` to generate VS Code config to setup IntelliSense!
 
 ## Example
 
@@ -33,6 +31,8 @@ function MyWidget() {
     </widget>
   );
 }
+
+// MyWidget() would return ListWidget now
 ```
 
 ## TODO

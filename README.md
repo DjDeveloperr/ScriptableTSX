@@ -7,7 +7,7 @@ A framework for [Scriptable](https://scriptable.app) to make creating iOS widget
 Install the CLI using [Deno](https://deno.land/):
 
 ```
-deno install -Arf -n scriptable https://raw.githubusercontent.com/DjDeveloperr/ScriptableTSX/main/cli.ts
+deno install -Afr --no-check -n scriptable https://raw.githubusercontent.com/DjDeveloperr/ScriptableTSX/main/cli.ts
 ```
 
 And do `scriptable init <name>`. After this you can go in the project directory
